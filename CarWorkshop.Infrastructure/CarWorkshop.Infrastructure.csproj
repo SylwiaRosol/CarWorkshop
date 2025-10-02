@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Car Workshop.Application\Car Workshop.Application.csproj" />
+    <ProjectReference Include="..\Car Workshop.Application\CarWorkshop.Application.csproj" />
   </ItemGroup>
 
 </Project>
