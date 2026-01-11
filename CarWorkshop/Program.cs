@@ -19,6 +19,7 @@ var seeder = scope.ServiceProvider.GetRequiredService<CarWorkshopSeeder>();
 
 await seeder.Seed();
 
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

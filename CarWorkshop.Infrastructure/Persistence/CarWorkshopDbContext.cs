@@ -13,6 +13,7 @@ namespace CarWorkshop.Infrastructure.Persistence
         {
         }
         public DbSet<Domain.Entities.CarWorkshop> CarWorkshop { get; set; }
+       
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
