@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace CarWorkshop.Infrastructure.Repositories
 {
+
     internal class CarWorkshopRepository : ICarWorkshopRespository
     {
         private readonly CarWorkshopDbContext _dbContext;
@@ -23,6 +24,10 @@ namespace CarWorkshop.Infrastructure.Repositories
 
             await _dbContext.SaveChangesAsync();
         }
+
+        public async Task<IEnumerable<Domain.Entities.CarWorkshop>> GetAll()
+       => await _dbContext.CarWorkshop.ToListAsync();
+
         public Task<Domain.Entities.CarWorkshop?> GetByName(string name)
         
             => _dbContext.CarWorkshop.FirstOrDefaultAsync(cw => cw.Name.ToLower() == name.ToLower());

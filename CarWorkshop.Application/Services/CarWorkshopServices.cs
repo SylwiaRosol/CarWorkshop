@@ -26,5 +26,10 @@ namespace CarWorkshop.Application.Services
             // Save to database logic would go here
             await _carWorkshopRepository.Create(carWorkshop);
         }
+        public async Task<IEnumerable<CarWorkshopDto>> GetAll()
+        {
+            var carWorkshops = await _carWorkshopRepository.GetAll();
+            return _mapper.Map<IEnumerable<CarWorkshopDto>>(carWorkshops);
+        }
     }
 }
