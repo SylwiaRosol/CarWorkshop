@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarWorkshop.Application.CarWorkshop
+namespace CarWorkshop.Application.CarWorkshop.Commands.CreateCarWorkshop
 {
-    public class CarWorkshopDtoValidator : AbstractValidator<CarWorkshopDto>
+    public class CarWorkshopCommandValidator : AbstractValidator<CreateCarWorkshopCommand>
     {
-        public CarWorkshopDtoValidator(ICarWorkshopRespository respository)
+        public CarWorkshopCommandValidator(ICarWorkshopRespository respository)
         {
             RuleFor(x => x.Name)
                 .NotEmpty().WithMessage("Name is required.")
