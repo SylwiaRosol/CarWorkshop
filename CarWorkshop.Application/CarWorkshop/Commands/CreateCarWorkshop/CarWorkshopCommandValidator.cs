@@ -27,8 +27,8 @@ namespace CarWorkshop.Application.CarWorkshop.Commands.CreateCarWorkshop
             RuleFor(x => x.Description)
                 .NotEmpty().WithMessage("Description is required.");
             RuleFor(x => x.PhoneNumber)
-                .Length(8, 12).When(x => !string.IsNullOrEmpty(x.PhoneNumber))
-                .WithMessage("Phone number must be between 8 and 12 characters if provided.");
+                .MinimumLength(8)
+                .MaximumLength(12); 
         }
     }
 }

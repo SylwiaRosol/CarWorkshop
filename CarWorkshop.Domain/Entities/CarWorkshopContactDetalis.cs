@@ -8,7 +8,7 @@ namespace CarWorkshop.Domain.Entities
 {
     public class CarWorkshopContactDetalis
     { 
-        public string PhoneNumber { get; set; } = default!;
+        public string? PhoneNumber { get; set; } = default!;
         public string? Street { get; set; }
         public string? City { get; set; }
        
