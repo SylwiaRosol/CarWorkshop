@@ -1,4 +1,5 @@
 ﻿using CarWorkshop.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,8 @@ namespace CarWorkshop.Infrastructure.Seeders
         }
         public async Task Seed()
         {
+           
+
             if (await _dbContext.Database.CanConnectAsync())
             {
                 if (!_dbContext.CarWorkshop.Any())
