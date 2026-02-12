@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CarWorkshop.Application.ApplicationUser;
 using CarWorkshop.Domain.Interfaces;
 using MediatR;
 using System;
@@ -13,16 +14,21 @@ namespace CarWorkshop.Application.CarWorkshop.Commands.CreateCarWorkshop
     {
         private readonly ICarWorkshopRespository _carWorkshopRepository;
         private readonly IMapper _mapper;
-        public CarWorkshopCommandHandler(ICarWorkshopRespository carWorkshopRepository, IMapper mapper)
+        private readonly IUserContext _userContext;
+
+        public CarWorkshopCommandHandler(ICarWorkshopRespository carWorkshopRepository, IMapper mapper, IUserContext userContext)
         {
             _carWorkshopRepository = carWorkshopRepository;
             _mapper = mapper;
+            _userContext = userContext;
         }
         public async Task<Unit> Handle(CreateCarWorkshopCommand request, CancellationToken cancellationToken)
         {
             var carWorkshop = _mapper.Map<Domain.Entities.CarWorkshop>(request);
             // Business logic for creating a car workshop
             carWorkshop.EncodeName();
+
+            carWorkshop.CreatedById = _userContext.GetCurrentUser().Id;
             // Save to database logic would go here
             await _carWorkshopRepository.Create(carWorkshop);
 
