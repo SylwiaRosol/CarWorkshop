@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CarWorkshop.Application.ApplicationUser;
 using CarWorkshop.Application.CarWorkshop;
 using CarWorkshop.Application.CarWorkshop.Commands.EditCarWorkshop;
 using CarWorkshop.Domain.Entities;
@@ -12,8 +13,9 @@ namespace CarWorkshop.Application.Mappings
 {
     public class CarWorkshopMappingProfile : Profile
     {
-        public CarWorkshopMappingProfile()
+        public CarWorkshopMappingProfile( IUserContext userContext)
         {
+            var user = userContext.GetCurrentUser();
             CreateMap<CarWorkshopDto, Domain.Entities.CarWorkshop>()
                  .ForMember(e => e.ContactDetails, opt => opt.MapFrom(src => new CarWorkshopContactDetalis()
                  {
@@ -25,6 +27,7 @@ namespace CarWorkshop.Application.Mappings
                  }));
 
             CreateMap<Domain.Entities.CarWorkshop, CarWorkshopDto>()
+                .ForMember(dest => dest.IsEditable, opt => opt.MapFrom(src => user != null && src.CreatedById == user.Id))
                 .ForMember(dest => dest.PhoneNumber, opt => opt.MapFrom(src => src.ContactDetails.PhoneNumber))
                 .ForMember(dest => dest.Street, opt => opt.MapFrom(src => src.ContactDetails.Street))
                 .ForMember(dest => dest.City, opt => opt.MapFrom(src => src.ContactDetails.City))

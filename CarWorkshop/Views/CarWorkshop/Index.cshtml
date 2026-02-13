@@ -18,7 +18,11 @@
                 <h5 class="card-title">@item.Name</h5>
                 <h6 class="card-subtitle mb-2 text-muted">@item.PhoneNumber</h6>
                 <h6 class="card-text">@item.Description</h6>
-                <a class="btn btn-outline-secondary" asp-controller="CarWorkshop" asp-action="Edit" asp-route-encodedname="@item.EncodedName">Edit</a>
+                @if (item.IsEditable)
+                {
+                    <a class="btn btn-outline-secondary" asp-controller="CarWorkshop" asp-action="Edit" asp-route-encodedname="@item.EncodedName">Edit</a>
+                }
+               
                 <a class="btn btn-primary" asp-controller="CarWorkshop" asp-action="Details" asp-route-encodedname="@item.EncodedName">Details</a>
              
             </div>

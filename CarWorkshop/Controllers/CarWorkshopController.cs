@@ -48,6 +48,11 @@ namespace CarWorkshop.Controllers
         {
             var dto = await _mediator.Send(new GetCarWorkshopByEncodedNameQuery(encodedName));
 
+            if (dto == null || !dto.IsEditable)
+            {
+                return RedirectToAction("NoAccess", "Home");
+            }
+
             EditCarWorkshopCommand model = _mapper.Map<EditCarWorkshopCommand>(dto);
             return View(model);
         }
