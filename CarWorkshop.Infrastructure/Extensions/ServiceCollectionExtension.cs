@@ -20,8 +20,11 @@ namespace CarWorkshop.Infrastructure.Extensions
         {
             services.AddDbContext<CarWorkshopDbContext>(options => options.UseSqlServer(
                configuration.GetConnectionString("CarWorkshop")));
+
             services.AddDefaultIdentity<IdentityUser>()
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<CarWorkshopDbContext>();
+
 
             services.AddScoped<CarWorkshopSeeder>();
 

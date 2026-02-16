@@ -24,11 +24,17 @@ namespace CarWorkshop.Application.CarWorkshop.Commands.CreateCarWorkshop
         }
         public async Task<Unit> Handle(CreateCarWorkshopCommand request, CancellationToken cancellationToken)
         {
+            var currentUser = _userContext.GetCurrentUser();
+            if (currentUser == null || currentUser.IsInRole("Ower")) 
+            {
+               return Unit.Value;
+            }
             var carWorkshop = _mapper.Map<Domain.Entities.CarWorkshop>(request);
             // Business logic for creating a car workshop
             carWorkshop.EncodeName();
 
-            carWorkshop.CreatedById = _userContext.GetCurrentUser().Id;
+
+            carWorkshop.CreatedById = currentUser.Id;
             // Save to database logic would go here
             await _carWorkshopRepository.Create(carWorkshop);
 

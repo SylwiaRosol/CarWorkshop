@@ -28,12 +28,10 @@ namespace CarWorkshop.Controllers
             return View(carWorkshops);
         }
 
-        [Authorize]
+        [Authorize (Roles = "Owner")]
         public IActionResult Create()
         {
-        
             return View();
-
         }
 
         [Route("CarWorkshop/{encodedName}/Details")]
@@ -71,7 +69,7 @@ namespace CarWorkshop.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Owner")]
         public async Task<IActionResult> Create(CreateCarWorkshopCommand command)
         {
             if (!ModelState.IsValid)
