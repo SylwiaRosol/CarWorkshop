@@ -23,6 +23,8 @@ It allows users to add new workshops and edit existing ones.
 
 -> FluentValidation MVC – input data validation
 
+->  ASP.NET Identity 
+
 🧱 Architecture & Patterns
 
 -> CQRS (Command Query Responsibility Segregation)
@@ -36,8 +38,6 @@ For clean separation between domain models and view models.
 The project will be extended with:
 
 🔐 Authentication and authorization
-
-ASP.NET Identity
 
 🧪 Automated tests
 
