@@ -25,7 +25,7 @@ namespace CarWorkshop.Application.CarWorkshop.Commands.CreateCarWorkshop
         public async Task<Unit> Handle(CreateCarWorkshopCommand request, CancellationToken cancellationToken)
         {
             var currentUser = _userContext.GetCurrentUser();
-            if (currentUser == null || currentUser.IsInRole("Ower")) 
+            if (currentUser == null || !currentUser.IsInRole("Ower")) 
             {
                return Unit.Value;
             }
