@@ -26,10 +26,15 @@ namespace CarWorkshop.Application.CarWorkshop.Commands.CreateCarWorkshop
         {
             var currentUser = _userContext.GetCurrentUser();
 
-            if (currentUser == null || (!currentUser.IsInRole("Owner") && !currentUser.IsInRole("Admin"))) 
+          
+            var isEditable = currentUser != null  && (currentUser.IsInRole("Owner") || currentUser.IsInRole("Admin"));
+
+            if (!isEditable)
             {
-               return Unit.Value;
+                return Unit.Value;
             }
+
+
             var carWorkshop = _mapper.Map<Domain.Entities.CarWorkshop>(request);
             // Business logic for creating a car workshop
             carWorkshop.EncodeName();

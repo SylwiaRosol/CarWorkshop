@@ -182,6 +182,27 @@ namespace CarWorkshop.Infrastructure.Migrations
                         principalColumn: "Id");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Services",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Cost = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CarWorkshopId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Services", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Services_CarWorkshop_CarWorkshopId",
+                        column: x => x.CarWorkshopId,
+                        principalTable: "CarWorkshop",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -225,6 +246,11 @@ namespace CarWorkshop.Infrastructure.Migrations
                 name: "IX_CarWorkshop_CreatedById",
                 table: "CarWorkshop",
                 column: "CreatedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Services_CarWorkshopId",
+                table: "Services",
+                column: "CarWorkshopId");
         }
 
         /// <inheritdoc />
@@ -246,10 +272,13 @@ namespace CarWorkshop.Infrastructure.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "CarWorkshop");
+                name: "Services");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "CarWorkshop");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

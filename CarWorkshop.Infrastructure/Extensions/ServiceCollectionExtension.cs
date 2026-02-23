@@ -19,7 +19,8 @@ namespace CarWorkshop.Infrastructure.Extensions
         public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<CarWorkshopDbContext>(options => options.UseSqlServer(
-               configuration.GetConnectionString("CarWorkshop")));
+               configuration.GetConnectionString("CarWorkshop"),
+                b => b.MigrationsAssembly(typeof(CarWorkshopDbContext).Assembly.FullName)));
 
             services.AddDefaultIdentity<IdentityUser>()
                 .AddRoles<IdentityRole>()
@@ -29,6 +30,7 @@ namespace CarWorkshop.Infrastructure.Extensions
             services.AddScoped<CarWorkshopSeeder>();
 
             services.AddScoped<ICarWorkshopRespository, CarWorkshopRepository>();
+            services.AddScoped<ICarWorkshopServiceRepository, CarWorkshopServiceRepository>();
         }
     }
 }
