@@ -14,6 +14,8 @@ namespace CarWorkshop.Application.ApplicationUser.Tests
      
         [Fact()]
         public void IsInRole_WithMatchingRole_ShouldReturnTrue()
+
+
         {
             //arrange
             var currentUser = new CurrentUser("1", "test@test,com", new List<string> { "Admin", "User" });
