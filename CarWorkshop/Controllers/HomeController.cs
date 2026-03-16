@@ -23,7 +23,7 @@ public class HomeController : Controller
     }
     public IActionResult About()
     {
-        var model = new About
+        var model = new About()
         {
             Title = "About Us",
             Description = "We are a leading car workshop providing top-notch services.",
