@@ -12,7 +12,15 @@ builder.Services.AddControllersWithViews(options => options.SuppressImplicitRequ
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+
 var app = builder.Build();
+
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 var scope = app.Services.CreateScope();
 var seeder = scope.ServiceProvider.GetRequiredService<CarWorkshopSeeder>();
@@ -32,6 +40,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
+
+
 app.UseAuthorization();
 
 
@@ -40,6 +50,7 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
    
 app.MapRazorPages();
+app.MapControllers();
 
 app.Run();
 

@@ -33,6 +33,10 @@ namespace CarWorkshop.Application.Extensions
             services.AddValidatorsFromAssemblyContaining<CarWorkshopCommandValidator>()
                 .AddFluentValidationAutoValidation()
                 .AddFluentValidationClientsideAdapters();
+
+
+         
+          
         }
     }
 }

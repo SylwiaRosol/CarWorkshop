@@ -27,18 +27,21 @@ namespace CarWorkshop.Controllers
             _mapper = mapper;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var carWorkshops = await _mediator.Send(new GetAllCarWorkshopsQuery());
             return View(carWorkshops);
         }
 
+        [HttpGet]
         [Authorize (Roles = "Owner, Admin")]
         public IActionResult Create()
         {
             return View();
         }
 
+        [HttpGet]
         [Route("CarWorkshop/{encodedName}/Details")]
         public async Task<IActionResult> Details(string encodedName)
         {
@@ -46,6 +49,7 @@ namespace CarWorkshop.Controllers
             return View(dto);
         }
 
+        [HttpGet]
         [Route("CarWorkshop/{encodedName}/Edit")]
         public async Task<IActionResult> Edit(string encodedName)
         {
