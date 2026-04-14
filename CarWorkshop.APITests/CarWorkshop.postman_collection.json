@@ -1,0 +1,140 @@
+﻿{
+  "info": {
+    "name": "CarWorkshop API Tests",
+    "_postman_id": "12345678-1234-1234-1234-123456789012",
+    "description": "Testy API dla CarWorkshop",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://localhost:7160"
+    },
+    {
+      "key": "encodedName",
+      "value": "..."
+    }
+  ],
+  "item": [
+    {
+      "name": "Create Workshop",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/carworkshopapi",
+          "host": [ "{{baseUrl}}" ],
+          "path": [ "api", "carworkshopapi" ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"TestWorkshop123\",\n  \"description\": \"Test desc\",\n  \"phoneNumber\": \"123456789\",\n  \"street\": \"Testowa\",\n  \"city\": \"Warszawa\",\n  \"postalCode\": \"00-001\"\n}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status is 201\", function () {",
+              "    pm.response.to.have.status(201);",
+              "});",
+
+              "const jsonData = pm.response.json();",
+              "pm.environment.set(\"encodedName\", jsonData.encodedName);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Get All",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/carworkshopapi",
+          "host": [ "{{baseUrl}}" ],
+          "path": [ "api", "carworkshopapi" ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Response is array\", function () {",
+              "    pm.expect(pm.response.json()).to.be.an(\"array\");",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+     
+    {
+      "name": "Update Workshop",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/carworkshopapi/{{encodedName}}",
+          "host": [ "{{baseUrl}}" ],
+          "path": [ "api", "carworkshopapi", "{{encodedName}}" ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"UpdatedWorkshop\",\n  \"description\": \"Updated desc\",\n  \"phoneNumber\": \"987654321\",\n  \"street\": \"Nowa\",\n  \"city\": \"Krakow\",\n  \"postalCode\": \"11-111\"\n}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status is 204\", function () {",
+              "    pm.response.to.have.status(204);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Get Not Existing",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/carworkshopapi/does-not-exist",
+          "host": [ "{{baseUrl}}" ],
+          "path": [ "api", "carworkshopapi", "does-not-exist" ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Returns 404\", function () {",
+              "    pm.response.to.have.status(404);",
+              "});"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

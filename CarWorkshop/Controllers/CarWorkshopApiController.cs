@@ -44,14 +44,17 @@ namespace CarWorkshop.Controllers
 
             await _mediator.Send(command);
 
-            return CreatedAtAction(nameof(Get), new { encodedName = command.Name }, command);
+            return CreatedAtAction(nameof(Get), new { encodedName = command.EncodedName }, new
+            {
+                command.Name,
+                command.EncodedName
+            });
         }
 
         [HttpPut("{encodedName}")]
         public async Task<IActionResult> Edit(string encodedName, EditCarWorkshopCommand command)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+            command.EncodedName = encodedName;
 
             await _mediator.Send(command);
 

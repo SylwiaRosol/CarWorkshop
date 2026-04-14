@@ -21,6 +21,9 @@ namespace CarWorkshop.Application.CarWorkshop.Queries.GetCarWorkshopByEncodedNam
         public async Task<CarWorkshopDto> Handle(GetCarWorkshopByEncodedNameQuery request, CancellationToken cancellationToken)
         {
             var carWorkshop = await _carWorkshopRepository.GetByEncodedName(request.EncodedName);
+            if (carWorkshop == null)
+                return null;
+
             var dto = _mapper.Map<CarWorkshopDto>(carWorkshop);
             return dto;
         }
