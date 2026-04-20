@@ -1,51 +1,64 @@
 🚗 Car Workshop
 
-Car Workshop is a web application designed for browsing and managing car workshops.
-It allows users to add new workshops and edit existing ones.
+Car Workshop is a web application designed for browsing and managing car workshops. It allows users to view, add, and edit workshop information in a structured and user-friendly way.
 
-✨ Features
+📌 Features
+-> Browse available car workshops
+-> Add new workshops
+-> Edit existing workshop data
+-> Pre-seeded database with sample data
+-> Data validation before saving
+-> Role-based access control:
+-> User
+-> Moderator
 
-- Browsing a list of car workshops
+🛠️ Technologies
+- ASP.NET Core
+- ASP.NET MVC
+- ASP.NET Identity
+- Entity Framework Core
+- FluentValidation
+- CQRS (Command Query Responsibility Segregation)
+  
+🧪 Testing
+-> Unit tests implemented using xUnit
+-> API endpoints tested with Postman
 
-- Adding new car workshops
+⚙️ CI/CD
+Integrated with GitHub Actions for automated build and testing
 
-- Editing existing workshops
+🗄️ Database
+Data is validated before being stored
+Initial data is seeded automatically
 
-- Validation of user input data
+🚀 Getting Started
 
-- Seeded initial data in the database
+Clone the repository:
 
-🛠️ Technologies Used
+git clone https://github.com/your-username/car-workshop.git
 
--> ASP.NET Core MVC
+Navigate to the project folder:
 
--> Entity Framework Core – database access
+cd car-workshop
+Update database connection string in appsettings.json
 
--> FluentValidation MVC – input data validation
+Apply migrations:
 
-->  ASP.NET Identity 
+dotnet ef database update
 
-🧱 Architecture & Patterns
+Run the application:
 
--> CQRS (Command Query Responsibility Segregation)
-Used to separate read and write operations, improving code clarity and maintainability.
+dotnet run
 
--> Data mapping (DTO ↔ Entities)
-For clean separation between domain models and view models.
+🔐 Authentication & Authorization
 
-🔮 Future Plans
+The application uses ASP.NET Identity for authentication and role management.
 
-The project will be extended with:
+Available roles:
+User – can browse workshops
+Moderator – can manage (add/edit) workshops
 
-🔐 Authentication and authorization
-
-🧪 Automated tests
-
-Unit tests
-
-Integration tests 
-
-📌 Project Status
-
-🚧 Work in progress
-The application is being actively developed and refactored.
+📄 Notes
+The project follows CQRS architecture for better separation of concerns
+Clean and scalable structure
+Ready for deployment and further extension
